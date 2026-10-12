@@ -1,10 +1,10 @@
 //The values in this file can override the configuration at LoopCaregiver/LoopConfigOverride.xcconfig
 
 // Override this if you don't want the default com.${DEVELOPMENT_TEAM}.loopkit that Caregiver uses
-// CAREGIVER_APP_BUNDLE_IDENTIFIER = com.myname.LoopCaregiver
+CAREGIVER_APP_BUNDLE_IDENTIFIER = org.nightscout.RN4R6FYB96.trio.caregiver
 
 // Customize this to change the app name displayed
-MAIN_APP_DISPLAY_NAME = Loop Caregiver
+MAIN_APP_DISPLAY_NAME = Trio Caregiver
 
 // Features
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) SIMULATORS_ENABLED //DEBUG_FEATURES_ENABLED

@@ -1,5 +1,5 @@
-name: 4. Build LoopCaregiver
-run-name: Build LoopCaregiver (${{ github.ref_name }})
+name: 4. Build Trio Caregiver
+run-name: Build Trio Caregiver (${{ github.ref_name }})
 on:
   workflow_dispatch:
   schedule:
@@ -9,6 +9,7 @@ on:
 
 env:
   GH_PAT: ${{ secrets.GH_PAT }}
+  CAREGIVER_BUNDLE_ID: org.nightscout.RN4R6FYB96.trio.caregiver
   UPSTREAM_REPO: LoopKit/LoopCaregiver
   UPSTREAM_BRANCH: ${{ github.ref_name }} # branch on upstream repository to sync from (replace with specific branch name if needed)
   TARGET_BRANCH: ${{ github.ref_name }} # target branch on fork to be kept in sync
@@ -237,6 +238,7 @@ jobs:
           FASTLANE_ISSUER_ID: ${{ secrets.FASTLANE_ISSUER_ID }}
           FASTLANE_KEY: ${{ secrets.FASTLANE_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          CAREGIVER_BUNDLE_ID: ${{ env.CAREGIVER_BUNDLE_ID }}
 
       # Upload to TestFlight
       - name: Fastlane upload to TestFlight
@@ -248,6 +250,7 @@ jobs:
           FASTLANE_ISSUER_ID: ${{ secrets.FASTLANE_ISSUER_ID }}
           FASTLANE_KEY: ${{ secrets.FASTLANE_KEY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          CAREGIVER_BUNDLE_ID: ${{ env.CAREGIVER_BUNDLE_ID }}
 
       # Upload Build artifacts
       - name: Upload build log, IPA and Symbol artifacts

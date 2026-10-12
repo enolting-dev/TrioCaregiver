@@ -1057,7 +1057,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoopCaregiverWidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LoopCaregiverWidget;
+				INFOPLIST_KEY_CFBundleDisplayName = TrioCaregiverWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1088,7 +1088,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoopCaregiverWidgetExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LoopCaregiverWidget;
+				INFOPLIST_KEY_CFBundleDisplayName = TrioCaregiverWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1439,7 +1439,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoopCaregiverIntentExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LoopCaregiverIntentExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = TrioCaregiverIntentExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1468,7 +1468,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoopCaregiverIntentExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LoopCaregiverIntentExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = TrioCaregiverIntentExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (

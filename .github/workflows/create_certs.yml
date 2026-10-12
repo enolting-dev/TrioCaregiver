@@ -5,6 +5,7 @@ on: [workflow_call, workflow_dispatch]
 
 env:
   TEAMID: ${{ secrets.TEAMID }}
+  CAREGIVER_BUNDLE_ID: org.nightscout.RN4R6FYB96.trio.caregiver
   GH_PAT: ${{ secrets.GH_PAT }}
   GH_TOKEN: ${{ secrets.GH_PAT }}
   MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}

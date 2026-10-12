@@ -13,6 +13,7 @@
 default_platform(:ios)
 
 TEAMID = ENV["TEAMID"]
+CAREGIVER_BUNDLE_ID = ENV.fetch("CAREGIVER_BUNDLE_ID", "org.nightscout.#{TEAMID}.trio.caregiver")
 GH_PAT = ENV["GH_PAT"]
 GITHUB_WORKSPACE = ENV["GITHUB_WORKSPACE"]
 GITHUB_REPOSITORY_OWNER = ENV["GITHUB_REPOSITORY_OWNER"]
@@ -40,7 +41,7 @@ platform :ios do
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "com.#{TEAMID}.loopkit.LoopCaregiver",
+      app_identifier: CAREGIVER_BUNDLE_ID,
       api_key: api_key,
     )
 
@@ -55,11 +56,11 @@ platform :ios do
       type: "appstore",
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "com.#{TEAMID}.loopkit.LoopCaregiver",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.IntentExtension",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.WidgetExtension",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp.WidgetExtension",
+        CAREGIVER_BUNDLE_ID,
+        "#{CAREGIVER_BUNDLE_ID}.IntentExtension",
+        "#{CAREGIVER_BUNDLE_ID}.WidgetExtension",
+        "#{CAREGIVER_BUNDLE_ID}.watchkitapp",
+        "#{CAREGIVER_BUNDLE_ID}.watchkitapp.WidgetExtension",
       ]
     )
 
@@ -69,35 +70,35 @@ platform :ios do
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/LoopCaregiver/LoopCaregiver.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.LoopCaregiver"],
+      profile_name: mapping[CAREGIVER_BUNDLE_ID],
       code_sign_identity: "iPhone Distribution",
       targets: ["LoopCaregiver"]
     )
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/LoopCaregiver/LoopCaregiver.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.LoopCaregiver.IntentExtension"],
+      profile_name: mapping["#{CAREGIVER_BUNDLE_ID}.IntentExtension"],
       code_sign_identity: "iPhone Distribution",
       targets: ["LoopCaregiverIntentExtension"]
     )
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/LoopCaregiver/LoopCaregiver.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.LoopCaregiver.WidgetExtension"],
+      profile_name: mapping["#{CAREGIVER_BUNDLE_ID}.WidgetExtension"],
       code_sign_identity: "iPhone Distribution",
       targets: ["LoopCaregiverWidgetExtension"]
     )
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/LoopCaregiver/LoopCaregiver.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp"],
+      profile_name: mapping["#{CAREGIVER_BUNDLE_ID}.watchkitapp"],
       code_sign_identity: "iPhone Distribution",
       targets: ["LoopCaregiverWatchApp"]
     )
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/LoopCaregiver/LoopCaregiver.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp.WidgetExtension"],
+      profile_name: mapping["#{CAREGIVER_BUNDLE_ID}.watchkitapp.WidgetExtension"],
       code_sign_identity: "iPhone Distribution",
       targets: ["LoopCaregiverWatchAppExtension"]
     )
@@ -156,23 +157,23 @@ platform :ios do
       end
     end
 
-    configure_bundle_id("LoopCaregiver", "com.#{TEAMID}.loopkit.LoopCaregiver", [
+    configure_bundle_id("Trio Caregiver", CAREGIVER_BUNDLE_ID, [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS,
     ])
 
-    configure_bundle_id("LoopCaregiverIntentExtension", "com.#{TEAMID}.loopkit.LoopCaregiver.IntentExtension", [
+    configure_bundle_id("Trio Caregiver Intent Extension", "#{CAREGIVER_BUNDLE_ID}.IntentExtension", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
     ])
 
-    configure_bundle_id("LoopCaregiverWidgetExtension", "com.#{TEAMID}.loopkit.LoopCaregiver.WidgetExtension", [
+    configure_bundle_id("Trio Caregiver Widget Extension", "#{CAREGIVER_BUNDLE_ID}.WidgetExtension", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
     ])
 
-    configure_bundle_id("LoopCaregiverWatch", "com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp", [
+    configure_bundle_id("Trio Caregiver Watch", "#{CAREGIVER_BUNDLE_ID}.watchkitapp", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
     ])
 
-    configure_bundle_id("LoopCaregiverWatchWidgetExtension", "com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp.WidgetExtension", [
+    configure_bundle_id("Trio Caregiver Watch Widget Extension", "#{CAREGIVER_BUNDLE_ID}.watchkitapp.WidgetExtension", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
     ])
 
@@ -195,11 +196,11 @@ platform :ios do
       verbose: true,
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "com.#{TEAMID}.loopkit.LoopCaregiver",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.IntentExtension",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.WidgetExtension",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp",
-        "com.#{TEAMID}.loopkit.LoopCaregiver.watchkitapp.WidgetExtension",
+        CAREGIVER_BUNDLE_ID,
+        "#{CAREGIVER_BUNDLE_ID}.IntentExtension",
+        "#{CAREGIVER_BUNDLE_ID}.WidgetExtension",
+        "#{CAREGIVER_BUNDLE_ID}.watchkitapp",
+        "#{CAREGIVER_BUNDLE_ID}.watchkitapp.WidgetExtension",
       ]
     )
   end
@@ -219,7 +220,7 @@ platform :ios do
       bundle_id = Spaceship::ConnectAPI::BundleId.find(identifier)
     end
 
-    find_bundle_id("com.#{TEAMID}.loopkit.LoopCaregiver")
+    find_bundle_id(CAREGIVER_BUNDLE_ID)
 
     match(
       type: "appstore",
