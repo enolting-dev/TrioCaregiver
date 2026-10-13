@@ -36,7 +36,6 @@ platform :ios do
     )
 
     produce(
-      api_key: api_key,
       app_identifier: CAREGIVER_BUNDLE_ID,
       app_name: "Trio Caregiver",
       sku: "trio-caregiver-rn4r6fyb96",
