@@ -29,19 +29,22 @@ platform :ios do
   lane :caregiver_app do
     setup_ci if ENV['CI']
 
-    api_key = app_store_connect_api_key(
+    app_store_connect_api_key(
       key_id: "#{FASTLANE_KEY_ID}",
       issuer_id: "#{FASTLANE_ISSUER_ID}",
       key_content: "#{FASTLANE_KEY}"
     )
 
-    produce(
-      app_identifier: CAREGIVER_BUNDLE_ID,
-      app_name: "Trio Caregiver",
+    app = Spaceship::ConnectAPI::App.find(CAREGIVER_BUNDLE_ID)
+    app ||= Spaceship::ConnectAPI::App.create(
+      name: "Trio Caregiver",
       sku: "trio-caregiver-rn4r6fyb96",
-      language: "English (U.S.)",
-      platform: "ios"
+      primary_locale: "en-US",
+      bundle_id: CAREGIVER_BUNDLE_ID,
+      platforms: ["IOS"]
     )
+    UI.user_error!("App Store Connect did not return the Trio Caregiver app record") unless app
+    UI.success("Trio Caregiver App Store Connect record is ready: #{app.id}")
   end
 
   desc "Build Caregiver"
