@@ -38,6 +38,16 @@ jobs:
         run: sudo sntp -sS time.windows.com
         
       # Create or update identifiers for Trio Caregiver
+      - name: Create App Store Connect record
+        run: bundle exec fastlane caregiver_app
+        env:
+          TEAMID: ${{ secrets.TEAMID }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          FASTLANE_KEY_ID: ${{ secrets.FASTLANE_KEY_ID }}
+          FASTLANE_ISSUER_ID: ${{ secrets.FASTLANE_ISSUER_ID }}
+          FASTLANE_KEY: ${{ secrets.FASTLANE_KEY }}
+          CAREGIVER_BUNDLE_ID: org.nightscout.RN4R6FYB96.trio.caregiver
       - name: Fastlane Provision Caregiver
         run: bundle exec fastlane caregiver_identifier
         env:
