@@ -1,0 +1,37 @@
+name: Temporary Match backup to Bitwarden
+on: workflow_dispatch
+permissions: {}
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install verified Bitwarden CLI
+        run: |
+          set -eu
+          curl -fsSL -o /tmp/bws.zip https://github.com/bitwarden/sdk-sm/releases/download/bws-v2.0.0/bws-x86_64-unknown-linux-gnu-2.0.0.zip
+          echo 'a8340ce01da609200441f2eca0e591173e124f012c88a16afda574279c052013  /tmp/bws.zip' | sha256sum -c -
+          unzip -q /tmp/bws.zip -d /tmp/bws-bin
+      - name: Transfer and verify without displaying secrets
+        env:
+          BWS_ACCESS_TOKEN: ${{ secrets.OPENCLAW_BWS_TRANSFER_TOKEN }}
+          MATCH_VALUE: ${{ secrets.MATCH_PASSWORD }}
+        run: |
+          set -eu
+          python3 - <<'PYCODE'
+          import os,json,subprocess,sys
+          b='/tmp/bws-bin/bws'; pid='606d95a1-4451-4ae8-983d-b50e00374acd'; name='APPLE_FASTLANE_MATCH_PASSWORD'
+          val=os.environ['MATCH_VALUE']
+          if not val: sys.exit('Source password is empty')
+          def invoke(args):
+              p=subprocess.run([b]+args,capture_output=True,text=True)
+              if p.returncode: sys.exit('Bitwarden command failed; secret not printed')
+              return p.stdout
+          prior=json.loads(invoke(['secret','list',pid]))
+          if any(x['key']==name for x in prior): sys.exit('Destination exists; refusing overwrite')
+          invoke(['secret','create',name,val,pid,'--output','none'])
+          after=json.loads(invoke(['secret','list',pid])); matching=[x for x in after if x['key']==name]
+          if len(matching)!=1: sys.exit('Destination verification failed')
+          detail=json.loads(invoke(['secret','get',matching[0]['id']]))
+          if detail.get('value') != val: sys.exit('Destination verification failed')
+          print('Backup verified against source')
+          PYCODE
